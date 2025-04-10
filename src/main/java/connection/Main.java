@@ -22,9 +22,11 @@ public class Main {
 
         Cliente cliente1 = new Cliente("XAVIER", "ROSILLO", "123X", LocalDate.of(1993,2,14));
 
-        datos.addCliente(cliente1);
-        datos.deleteCliente("123X");
+//        datos.addCliente(cliente1);
+//        datos.deleteCliente("123X");
         System.out.println(clientes);
+
+//        System.out.println(datos.getCliente("123X"));
     }
 
 }

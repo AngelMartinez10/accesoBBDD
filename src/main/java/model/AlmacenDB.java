@@ -8,5 +8,7 @@ public interface AlmacenDB {
     int updateCliente(Cliente cliente);
     int addCliente(Cliente cliente);
     int deleteCliente(String DNI);
+    Cliente getCliente(String dni);
+    void eliminarFactura(int numeroFactura);
 
 }
