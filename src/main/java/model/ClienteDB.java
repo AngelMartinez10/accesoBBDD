@@ -183,4 +183,46 @@ public class ClienteDB implements AlmacenDB {
             e.printStackTrace();
         }
     }
+    @Override
+    public int articulosPrecio(int precio) {
+        DataSource dataSource = MyDataSource.getMySQLDataSource();
+        String query = "{ ? = call articulos_precio(?) }";
+        int resultado = -1;
+
+        try (Connection connection = dataSource.getConnection();
+             CallableStatement callableStatement = connection.prepareCall(query)) {
+            callableStatement.setInt(2, precio);
+
+            ResultSet resultSet = callableStatement.executeQuery();
+            resultSet.next();
+            resultado = resultSet.getInt(1);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultado;
+    }
+
+    @Override
+    public int crearFactura(int codCliente) {
+        DataSource dataSource = MyDataSource.getMySQLDataSource();
+        String query = "{ call crear_factura(?, ?)}";
+        int numFactura = -1;
+        try (Connection connection = dataSource.getConnection();
+            CallableStatement callableStatement = connection.prepareCall(query)){
+
+            callableStatement.setInt(2, codCliente);
+            callableStatement.registerOutParameter(1, Types.INTEGER);
+            callableStatement.executeUpdate();
+            numFactura = callableStatement.getInt(1);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return numFactura;
+    }
+
+    // si es función devuelve algo y se pone " ? = "
+
 }

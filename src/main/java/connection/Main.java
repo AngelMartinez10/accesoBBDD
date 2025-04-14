@@ -27,6 +27,8 @@ public class Main {
         System.out.println(clientes);
 
 //        System.out.println(datos.getCliente("123X"));
+        System.out.println(datos.articulosPrecio(100));
+        System.out.println(datos.crearFactura(1));
     }
 
 }
